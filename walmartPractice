@@ -1,0 +1,78 @@
+import csv
+import pandas as pd
+import requests
+from bs4 import BeautifulSoup
+#This was is a failure though I wouldn't it isn't as it does retrieve the items
+#The reason why its a failure is because it get stuck at 6 items and loops the retrieval.
+
+url = 'https://www.walmart.com/search?q=bottled+water'
+itemslist = []
+
+def geturl(url):
+    headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36", "Accept-Encoding":"gzip, deflate", "Accept":"text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8", "DNT":"1","Connection":"close", "Upgrade-Insecure-Requests":"1"}
+
+    page = requests.get(url, headers=headers)
+
+    soup1 = BeautifulSoup(page.content, 'html.parser')
+    soup2 = BeautifulSoup(soup1.prettify(), "html.parser")
+    return soup2
+
+def getitems(soup2):
+    products = soup2.find_all('div', {'class': 'mb1 ph1 pa0-xl bb b--near-white w-25'})
+
+    for item in products:
+        title = item.find('a', {'class': 'absolute w-100 h-100 z-1'}).text.strip()
+        split_title = title.rsplit(',')[0]
+        link = item.find('a', {'class': 'absolute w-100 h-100 z-1'})['href']
+        try:
+            price = float(item.find_all('div', {'class': 'b black f5 mr1 mr2-xl lh-copy f4-l'})[0].text.replace('$', '').strip())
+        except:
+            price = 0
+        try:
+            oldprice = item.find_all('div', {'class': 'flex flex-wrap justify-start items-center lh-title mb2 mb1-m'})[0].strip()
+            split_oldprice = oldprice.rsplit('$')[3]
+        except:
+            oldprice = 0
+            split_oldprice = oldprice
+        try:
+            ounces = item.find('span', {'class': 'f6 f5-l normal dark-gray mb0 mt1 lh-title'}).text.strip()
+            split_ounces = ounces.rsplit(',')[-1]
+        except:
+            ounces = None
+            split_ounces = ounces
+        try:
+            reviews = float(item.find('span', {'class': 'sans-serif gray f7'}).text.strip())
+        except:
+            reviews = 0
+        
+        itemdetails = {
+            'title': title,
+            'split_title': split_title,
+            'price': price,
+            'oldprice': split_oldprice,
+            'ounces': split_ounces,
+            'reviews': reviews,
+            'link': link
+             }
+
+        itemslist.append(itemdetails)
+    return
+
+def getnextpage(soup): 
+    pages = soup.find('ul', {'class': 'list flex items-center justify-center pa0'})   
+    print(pages)
+    if pages.find('a', {'data-testid': 'NextPage'}):
+        url = 'https://www.walmart.com' + str(pages.find('a', {'data-testid': 'NextPage'}).find('a')['href'])
+        return url
+    else:
+        return
+
+
+for x in range(5):
+    soup = geturl(url)
+    getitems(soup)
+
+df = pd.DataFrame(itemslist)
+df.to_csv('example.csv', index=False)
+print('Fin.')
+
