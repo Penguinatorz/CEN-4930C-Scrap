@@ -1,4 +1,5 @@
-#import csv
+import csv
+import time
 import pandas as pd
 import requests
 from bs4 import BeautifulSoup
@@ -48,14 +49,16 @@ def getitems(soup2):
         except:
             reviews = 0
         
+        today = time.asctime(time.localtime(time.time()))
         itemdetails = {
             'title': title,
             'split_title': split_title,
-            'link': link,
             'price': price,
             'subscriberprice': subscribePrice,
             'ounces': ounces,
-            'reviews': reviews
+            'reviews': reviews,
+            'Date': today,
+            'link': link
              }
 
         itemslist.append(itemdetails)
