@@ -7,4 +7,4 @@ I am guided by such and will show my progress as a timeline of sorts in here.
 --- 10/22/21
 A lot of the files shown here were examples done and practices through the usage of youtube video for my knowledge.
 
-The main scrapper file is the amazonScraper.py
+The main scrapper file is the amazonScraper.py, walmartScraper.py, and sqlTransfer.py
