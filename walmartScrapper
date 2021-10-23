@@ -76,4 +76,4 @@ for pg in range(len(url)):
 
 df = pd.DataFrame(itemslist)
 df.to_csv('Example.csv', index=False)
-print('Done.')
+print('Done. ')
