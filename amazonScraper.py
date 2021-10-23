@@ -4,10 +4,12 @@ import pandas as pd
 import requests
 from bs4 import BeautifulSoup
 
+#items
 url = 'https://www.amazon.com/s?k=water+bottled&qid=1634885362&ref=sr_pg_1'
 itemslist = []
-check = 1
+#check = 1 #this was used to loop through the soup and retrieve it into a .txt file to look into the param as title and link had two different a tag
 
+#soup retrieval
 def geturl(url):
     headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36", "Accept-Encoding":"gzip, deflate", "Accept":"text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8", "DNT":"1","Connection":"close", "Upgrade-Insecure-Requests":"1"}
 
@@ -18,6 +20,7 @@ def geturl(url):
 
     return soup2
 
+#items being retrieved from soup
 def getitems(soup2):
     products = soup2.find_all('div', {'data-component-type': 's-search-result'})
 
@@ -63,7 +66,7 @@ def getitems(soup2):
 
         itemslist.append(itemdetails)
     return
-
+#amazon next page
 def getnextpage(soup): 
     pages = soup.find('ul', {'class': 'a-pagination'})   
     if not pages.find('li', {'class': 'a-disabled a-last'}):
@@ -72,12 +75,12 @@ def getnextpage(soup):
     else:
         return
 
-
+#looping to 3 pages as I don't want to loop through all of the pages
 for x in range(3):
     soup = geturl(url)
     getitems(soup)
     url = getnextpage(soup)
-
+#csv creation
 df = pd.DataFrame(itemslist)
 df.to_csv('aExample.csv', index=False)
 print('Done.')
