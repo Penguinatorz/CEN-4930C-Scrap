@@ -5,7 +5,8 @@ from bs4 import BeautifulSoup
 #This was is a failure though I wouldn't it isn't as it does retrieve the items
 #The reason why its a failure is because it get stuck at 6 items and loops the retrieval.
 
-url = 'https://www.walmart.com/search?q=bottled+water'
+url = ['https://www.walmart.com/search?q=bottled+water&affinityOverride=store_led']
+categories = ["Water_Bottle"]
 itemslist = []
 
 def geturl(url):
@@ -58,21 +59,21 @@ def getitems(soup2):
         itemslist.append(itemdetails)
     return
 
-def getnextpage(soup): 
-    pages = soup.find('ul', {'class': 'list flex items-center justify-center pa0'})   
-    print(pages)
-    if pages.find('a', {'data-testid': 'NextPage'}):
-        url = 'https://www.walmart.com' + str(pages.find('a', {'data-testid': 'NextPage'}).find('a')['href'])
-        return url
-    else:
-        return
 
-
-for x in range(5):
-    soup = geturl(url)
-    getitems(soup)
+for pg in range(len(url)):
+    # number of pages per category
+    top_n= ["1","2","3","4","5"]
+    
+    # extract page number within sub-category
+    url_category=url[pg]
+    print("Category:",categories[pg])
+    for i_1 in range(len(top_n)):
+        print("Page number within category:",i_1)
+        url_cat=url_category+"&page="+top_n[i_1]
+        print(url_cat)
+        soup = geturl(url_cat)
+        getitems(soup)
 
 df = pd.DataFrame(itemslist)
-df.to_csv('example.csv', index=False)
-print('Fin.')
-
+df.to_csv('Example.csv', index=False)
+print('Done.')
