@@ -1,4 +1,5 @@
 import csv
+import time
 import pandas as pd
 import requests
 from bs4 import BeautifulSoup
@@ -46,6 +47,8 @@ def getitems(soup2):
         except:
             reviews = 0
         
+        today = time.asctime(time.localtime(time.time()))
+
         itemdetails = {
             'title': title,
             'split_title': split_title,
@@ -53,6 +56,7 @@ def getitems(soup2):
             'oldprice': split_oldprice,
             'ounces': split_ounces,
             'reviews': reviews,
+            'Date': today,
             'link': link
              }
 
@@ -66,14 +70,11 @@ for pg in range(len(url)):
     
     # extract page number within sub-category
     url_category=url[pg]
-    print("Category:",categories[pg])
     for i_1 in range(len(top_n)):
-        print("Page number within category:",i_1)
         url_cat=url_category+"&page="+top_n[i_1]
-        print(url_cat)
         soup = geturl(url_cat)
         getitems(soup)
 
 df = pd.DataFrame(itemslist)
-df.to_csv('Example.csv', index=False)
-print('Done. ')
+df.to_csv('wExample.csv', index=False)
+print('Done.')
