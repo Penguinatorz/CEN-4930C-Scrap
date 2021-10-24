@@ -25,7 +25,7 @@ def create_table_amazon(tableName):
         return
     else:
         c.execute(f'''CREATE TABLE {tableName}(
-    {tableName}_product_id int not NULL identity(1,1) primary key, {tableName}_title varchar(300), {tableName}_split_title varchar(200), {tableName}_price float, {tableName}_subscriber_Price float, {tableName}_ounces varchar(40), {tableName}_count varchar(40), {tableName}_reviews float, {tableName}_date varchar(100), {tableName}_link nvarchar(2083), 
+    {tableName}_product_id int not NULL identity(1,1) primary key, {tableName}_title varchar(300), {tableName}_split_title varchar(200), {tableName}_price float, {tableName}_subscriber_Price float, {tableName}_ounces varchar(40), {tableName}_count varchar(40), {tableName}_reviews varchar(100), {tableName}_date varchar(100), {tableName}_link nvarchar(2083), 
     )''')
         print("Table is now created")
 
@@ -132,10 +132,19 @@ def getitems(soup2, tablename):
             count = None
             split_count = count        
         try:
-            reviews = float(item.find('span', {'class': 'a-size-base'}).text.strip())
+            reviews = item.find('span', {'class': 'a-size-base'}).text.strip()
         except:
             reviews = 0
-        
+        try:
+            if reviews is 0:
+                reviews = item.find('span', {'class': 'a-size-base a-color-base s-underline-text'}).text.strip()
+        except:
+            reviews = 0
+        try:
+            if reviews != None and "/Count)" in reviews:
+                reviews = 0
+        except:
+            reviews = reviews
         today = time.asctime(time.localtime(time.time()))
 
         c = conn.cursor()
