@@ -14,3 +14,6 @@ The main scrapper file is the amazonScraper.py, walmartScraper.py, and sqlTransf
 AmazonScraper.py and WalmartScraper.py are the main files. The database used is sql server so make sure to have import pyodbc
 In addition for some reason the amazon scraper sometimes picks up elements that are not correct being sent to sql; however, I reviewed the section into a smaller code
 and notice that at times the tag for the ounces and the count are not displayed. It is why sql retrieves NULLS and at times it retrieves incorrect tag of the given which I have no power in without higher knowledge in python as I am still a beginner.
+
+--- 10/24/2021 5:09 AM
+Amazonscraper.py has been updated. It nows retrieves reviews more reliably.
