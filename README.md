@@ -23,7 +23,8 @@ Amazonscraper.py has been updated. It nows retrieves reviews more reliably.
 
 The Scrapper takes records from www.amazon.com searching up 'bottled water' similarly with www.walmart.com searching up 'bottled water'
 
-The data takes information from the websites and place into a database in sql server.
+The data takes information from the websites and place into a database in sql server. The database for the progrm has been exported into two alternatives
+the .xls files and the .txt as flat files.
 Using python and beautiful soup I was successful and retrieving the data taking information every day for 7 days.
 
 The main scrapper file is the amazonScraper.py, walmartScraper.py
@@ -36,4 +37,5 @@ conn = pyodbc.connect('Driver={SQL Server};'
                       'Trusted_Connection=yes;')
                       
 Work around configuring into your database information.
+
 
