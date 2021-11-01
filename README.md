@@ -8,7 +8,7 @@ I am guided by such and will show my progress as a timeline of sorts in here.
 A lot of the files shown here were examples done and practices through the usage of youtube video for my knowledge.
 
 --- 10/22/21 11:48 pm
-The main scrapper file is the amazonScraper.py, walmartScraper.py, and sqlTransfer.py
+The main scrapper file is the amazonScraper.py, walmartScraper.py
 
 --- 10/23/21 4:28 AM
 AmazonScraper.py and WalmartScraper.py are the main files. The database used is sql server so make sure to have import pyodbc
@@ -25,3 +25,15 @@ The Scrapper takes records from www.amazon.com searching up 'bottled water' simi
 
 The data takes information from the websites and place into a database in sql server.
 Using python and beautiful soup I was successful and retrieving the data taking information every day for 7 days.
+
+The main scrapper file is the amazonScraper.py, walmartScraper.py
+
+To set up database look into this function in the python script
+
+conn = pyodbc.connect('Driver={SQL Server};'
+                      'Server=JOANCORAL\SQLEXPRESS;'
+                      'Database=ScrapData;'
+                      'Trusted_Connection=yes;')
+                      
+Work around configuring into your database information.
+
