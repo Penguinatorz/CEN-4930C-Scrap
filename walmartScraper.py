@@ -12,7 +12,6 @@ categories = ["Water_Bottle"]
 itemslist = []
 tablename = 'walmartData'
 
-
 conn = pyodbc.connect('Driver={SQL Server};'
                       'Server=JOANCORAL\SQLEXPRESS;'
                       'Database=ScrapData;'
@@ -42,7 +41,6 @@ def geturl(url):
 
 def has_numbers(inputString):
     return bool(re.search(r'\d', inputString))
-
 
 def sizechecker(splittxt):
     matches = ["ounce", "oz", "-ounce", "gallon", "ml", "oz.", "mL", "Oz", "Gallon", "Ounce", "ounces", "Ounces", "OZ", "ML", "Liter", "Liters"]
