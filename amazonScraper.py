@@ -9,11 +9,12 @@ url = 'https://www.amazon.com/s?k=water+bottled&qid=1634885362&ref=sr_pg_1'
 itemslist = []
 tableName = 'amazonData'
 
-
 conn = pyodbc.connect('Driver={SQL Server};'
                       'Server=JOANCORAL\SQLEXPRESS;'
                       'Database=ScrapData;'
                       'Trusted_Connection=yes;')
+
+
 
 def create_table_amazon(tableName):
 
@@ -25,7 +26,7 @@ def create_table_amazon(tableName):
         return
     else:
         c.execute(f'''CREATE TABLE {tableName}(
-    {tableName}_product_id int not NULL identity(1,1) primary key, {tableName}_title varchar(300), {tableName}_split_title varchar(200), {tableName}_price float, {tableName}_subscriber_Price float, {tableName}_ounces varchar(40), {tableName}_count varchar(40), {tableName}_reviews varchar(100), {tableName}_date varchar(100), {tableName}_link nvarchar(2083), 
+    {tableName}_product_id int not NULL identity(1,1) primary key, {tableName}_title varchar(800), {tableName}_split_title varchar(500), {tableName}_price float, {tableName}_subscriber_Price float, {tableName}_ounces varchar(100), {tableName}_count varchar(100), {tableName}_reviews varchar(200), {tableName}_date varchar(200), {tableName}_link nvarchar(3083), 
     )''')
         print("Table is now created")
 
@@ -41,7 +42,6 @@ def geturl(url):
 
 def has_numbers(inputString):
     return bool(re.search(r'\d', inputString))
-
 
 def countCreation(splittxt):
     matches = ["count", "pack", "Count", "Pack"]
