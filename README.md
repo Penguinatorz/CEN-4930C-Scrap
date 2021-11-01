@@ -41,3 +41,14 @@ conn = pyodbc.connect('Driver={SQL Server};'
 Work around configuring into your database information.
 
 
+
+1. Walmart table has about 400 rows. Amazon table has approximately 1000 rows.
+
+2. Walmart able has 10 columns. Amazon table has 10 columns
+
+3. www.walmart.com and www.amazon.com
+
+3a. I collected the data using python coding and using beautiful soup library to scrap information from the respective websites under the searched term 'bottled water'
+
+4. Column 1 is the id for the database. Column 2 is the title. Column 3 is the shorten title. Column 4 is the Price. Column 5 is the subscriber price for amazon and old price for walmart if the item is now on a newly discounted priced it will show the old price before the discount. Column 6 measurement fl oz, oz, gallon and pint. At times each item is listed under different names in ounces or in oz or in fl oz or in fl-oz and its difficult to capture all the variety of measurements they use. Column 7 is the amount or the package amount. Column 8 is the reviews. Column 9 is the date that the item has been retrieved and stored into the database. Column 10 is the product link so remember to type in the domain url at time the product link does not contain the full domain url.
+
