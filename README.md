@@ -17,6 +17,8 @@ and notice that at times the tag for the ounces and the count are not displayed.
 
 --- 10/24/2021 5:09 AM
 Amazonscraper.py has been updated. It nows retrieves reviews more reliably.
+Im not sure why though the walmart old prices always seems at 0 though on my practice database it had some values now it still shows 0.
+Im not sure if it actually works or if water bottles in walmart don't have discount on such items for it to have an 'old price'
 
 
 --- 10/31/2021
