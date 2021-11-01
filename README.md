@@ -17,3 +17,11 @@ and notice that at times the tag for the ounces and the count are not displayed.
 
 --- 10/24/2021 5:09 AM
 Amazonscraper.py has been updated. It nows retrieves reviews more reliably.
+
+
+--- 10/31/2021
+
+The Scrapper takes records from www.amazon.com searching up 'bottled water' similarly with www.walmart.com searching up 'bottled water'
+
+The data takes information from the websites and place into a database in sql server.
+Using python and beautiful soup I was successful and retrieving the data taking information every day for 7 days.
