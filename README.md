@@ -52,3 +52,7 @@ Work around configuring into your database information.
 
 4. Column 1 is the id for the database. Column 2 is the title. Column 3 is the shorten title. Column 4 is the Price. Column 5 is the subscriber price for amazon and old price for walmart if the item is now on a newly discounted priced it will show the old price before the discount. Column 6 measurement fl oz, oz, gallon and pint. At times each item is listed under different names in ounces or in oz or in fl oz or in fl-oz and its difficult to capture all the variety of measurements they use. Column 7 is the amount or the package amount. Column 8 is the reviews. Column 9 is the date that the item has been retrieved and stored into the database. Column 10 is the product link so remember to type in the domain url at time the product link does not contain the full domain url.
 
+5. This can be a bar graph or some sort of comparison chart between the prices or of any similar items between the two stores. A visualization of what products has cheaper bottled water can also work.
+
+6. SQL SERVER EXPRESS was the program I used for the database. Its also important to import pyodbc for python for my code to work properly and connect to the sql server database.
+
